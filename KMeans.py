@@ -32,26 +32,12 @@ def generate_gcode(image, clusters):
   
 # Gcode plotting  
 def plot_gcode(commands):
-
-  prev_cluster = None
-  
-  for command, x, y in commands:
-
-    # Get cluster 
-    if "(" in command:
-      current_cluster = int(command.split("(")[1].split(")")[0])
-    else:
-      current_cluster = 0
-    
-    if current_cluster != prev_cluster:
-        turtle.penup()
-
+ for command, x, y in commands:    
+    if command.startswith("G0"):
+      turtle.penup()
     if command.startswith("G1"):
         turtle.pendown()
-
     turtle.goto(x, y)  
-
-    prev_cluster = current_cluster
    
 # Main function
 if __name__ == "__main__":
